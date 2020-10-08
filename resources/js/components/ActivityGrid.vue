@@ -61,11 +61,11 @@
     export default class ActivityGrid extends Vue {
         @Prop({default:'Week Grid View'}) title!: string;
         @Prop({required: true}) mobs!: ISocialMob[];
-        weekCount: number = 100;
+        weekCount: number = 20;
 
         mounted(): void {
-            this.calculateNumberOfWeeks();
             window.addEventListener('resize', this.calculateNumberOfWeeks);
+            this.calculateNumberOfWeeks();
         }
 
         beforeDestroy(): void {
@@ -73,7 +73,7 @@
         }
 
         calculateNumberOfWeeks(): void {
-            const { clientWidth } = this.$refs.container;
+            const { clientWidth } = (this.$refs.container as Element & { clientWidth: number });
             this.weekCount = Math.round(clientWidth / (14 + (16 * 0.25)));
         }
 

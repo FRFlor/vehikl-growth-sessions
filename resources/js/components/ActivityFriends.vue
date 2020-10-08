@@ -7,13 +7,13 @@
       <table class="w-full table-auto">
         <thead>
           <tr>
-            <th class="p-1 text-left">Peer</th>
+            <th class="p-1 text-left">Friend</th>
             <th class="p-1 text-right">How Often</th>
           </tr>
         </thead>
         <tbody>
 
-          <tr v-for="peer in peers" :key="peer.user.id">
+          <tr v-for="peer in orderedPeers" :key="peer.user.id">
             <td class="py-2 border-b border-b-gray-200">
               <div class="flex flex-row items-center justify-start">
                 <v-avatar :src="peer.user.avatar" alt="" size="8"></v-avatar>
@@ -49,6 +49,10 @@
             return this.peers.reduce((num: number, peer : IMobConnection) => (
                 num + peer.count
             ), 0);
+        }
+
+        get orderedPeers(): IMobConnection[] {
+            return this.peers.sort((a, b) => b.count - a.count);
         }
     }
 </script>
