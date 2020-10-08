@@ -1,16 +1,16 @@
-<nav class="bg-blue-500 p-6">
-    <div class="container flex items-center  mx-auto justify-between flex-wrap">
+<nav class="p-6 bg-blue-500">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
         <div class="flex items-center flex-shrink-0 mr-6 text-white hover:text-orange-200">
-            <i class="fa fa-users text-2xl mr-2" aria-hidden="true"></i>
+            <i class="mr-2 text-2xl fa fa-users" aria-hidden="true"></i>
             <a href="{{ route('home') }}"
-               class="font-semibold text-3xl">{{ config('app.name', 'Vehikl Growth Sessions') }}</a>
+               class="text-3xl font-semibold">{{ config('app.name', 'Vehikl Growth Sessions') }}</a>
         </div>
         <div class="block lg:hidden">
             <button
-                class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-orange-200 hover:border-orange-200"
+                class="flex items-center px-3 py-2 text-white border border-white rounded hover:text-orange-200 hover:border-orange-200"
                 onclick="document.getElementById('nav-links').classList.toggle('hidden')"
                 @click="isExpanded = !isExpanded">
-                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <title>
                         Menu
                     </title>
@@ -19,23 +19,26 @@
             </button>
         </div>
         <div
-            class="w-full hidden text-xl uppercase lg:flex justify-end lg:items-center lg:w-auto text-center"
+            class="justify-end hidden w-full text-xl text-center uppercase lg:flex lg:items-center lg:w-auto"
             id="nav-links">
-            <div class="text-xl justify-center items-center flex flex-col lg:flex-row">
+            <div class="flex flex-col items-center justify-center text-xl lg:flex-row">
                 @guest
                     <a href="{{route('oauth.login.redirect')}}"
-                       class="flex items-center mt-4 lg:mt-0 mr-6 text-white hover:text-orange-200 ">
-                        <i class="fa fa-github text-3xl mr-4" aria-hidden="true"></i> Login
+                       class="flex items-center mt-4 mr-6 text-white lg:mt-0 hover:text-orange-200 ">
+                        <i class="mr-4 text-3xl fa fa-github" aria-hidden="true"></i> Login
                     </a>
                 @endguest
                 @auth
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                       class="mt-4 flex items-center lg:mt-0 text-white hover:text-orange-200 ">
+                    <a href="{{ route('activity') }}">
                         <v-avatar class="mr-4"
+                                  container-class="border border-transparent hover:border-orange-200"
                                   src="{{ auth()->user()->avatar }}"
                                   alt="Your Avatar"
                                   size="12"></v-avatar>
+                    </a>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                       class="flex items-center mt-4 text-white lg:mt-0 hover:text-orange-200 ">
                         Logout
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -43,7 +46,7 @@
                     </form>
                 @endauth
                 <a href="{{route('about')}}"
-                   class="mt-4 lg:mt-0 ml-6 text-white hover:text-orange-200 ">About
+                   class="mt-4 ml-6 text-white lg:mt-0 hover:text-orange-200 ">About
                 </a>
             </div>
         </div>
