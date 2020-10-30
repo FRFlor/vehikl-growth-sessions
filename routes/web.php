@@ -25,3 +25,5 @@ Route::prefix('social_mobs/{social_mob}/comments')->name('social_mobs.comments.'
     Route::get('/', 'CommentController@index')->name('index');
 });
 Route::resource('social_mobs.comments', 'CommentController')->middleware('auth')->only(['store','update','destroy']);
+
+Route::get('activity', 'ActivityController@index')->middleware('auth')->name('activity');
