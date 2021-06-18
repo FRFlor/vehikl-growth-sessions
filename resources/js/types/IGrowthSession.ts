@@ -13,4 +13,5 @@ export interface IGrowthSession {
     owner: IUser;
     attendees: IUser[];
     comments: IComment[];
+    zoom_meeting_id: string | null;
 }

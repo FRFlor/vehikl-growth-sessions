@@ -35,6 +35,7 @@ class GrowthSession extends Model
         'attendee_limit',
         'discord_channel_id',
         'is_public',
+        'zoom_meeting_id',
     ];
 
     protected $attributes = [

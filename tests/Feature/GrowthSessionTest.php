@@ -8,6 +8,7 @@ use App\UserType;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class GrowthSessionTest extends TestCase
@@ -686,5 +687,23 @@ class GrowthSessionTest extends TestCase
             ->assertSuccessful();
 
         $this->assertEmpty($growthSession->watchers);
+    }
+
+    /** @test */
+    public function aZoomCallCanBeCreatedWhenCreatingGrowthSession(): void
+    {
+        Http::fake([
+            'https://api.zoom.us/v2/users/me/meetings' => Http::response(['id' => 999], 200),
+        ]);
+
+        $vehiklMember = User::factory()->vehiklMember()->create();
+        $growthSessionsAttributes = GrowthSession::factory()->make()->toArray();
+        $growthSessionsAttributes['create_zoom_meeting'] = true;
+
+        $this->actingAs($vehiklMember)
+            ->post(route('growth_sessions.store'), $growthSessionsAttributes)
+            ->assertSuccessful();
+
+        $this->assertNotEmpty(GrowthSession::query()->where('zoom_meeting_id', 999)->first());
     }
 }

@@ -107,6 +107,13 @@
                       v-model="topic"/>
         </div>
 
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+                <input ref="auto-generate-zoom-meeting" v-model="createZoomMeeting" type="checkbox">
+                Auto-generate a Zoom meeting for this growth session
+            </label>
+        </div>
+
         <div class="mb-4" v-if="(discordChannels.length > 0)">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="discord_channel">
                 Discord Channel
@@ -160,6 +167,7 @@ import {IDropdownOption} from "../types/IDropdownOption";
         isLimitless: boolean = false;
         discordChannel: IDropdownOption = {value: '', label: ''};
         discordChannels: Array<Object> = [];
+        createZoomMeeting: boolean = false;
 
         mounted() {
             this.date = this.startDate;
@@ -253,6 +261,7 @@ import {IDropdownOption} from "../types/IDropdownOption";
                 is_public: this.isPublic,
                 attendee_limit: this.isLimitless ? undefined : this.attendeeLimit,
                 discord_channel_id: this.discordChannel.value || undefined,
+                create_zoom_meeting: this.createZoomMeeting,
             }
         }
 

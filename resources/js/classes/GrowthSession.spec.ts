@@ -25,7 +25,8 @@ describe('GrowthSession', () => {
         owner,
         title: "The growth session title",
         topic: "The growth session topic",
-        attendee_limit: null
+        attendee_limit: null,
+        zoom_meeting_id: null,
     };
 
     beforeEach(() => {

@@ -34,6 +34,7 @@ class UpdateGrowthSessionRequest extends FormRequest
             'end_time' => 'sometimes|required|after:start_time|date_format:h:i a',
             'date' => 'sometimes|required|date|after_or_equal:today',
             'attendee_limit' => 'sometimes|integer|min:'.max($minimumAttendees, $currentAttendees),
+            'create_zoom_meeting' => 'sometimes|boolean',
         ];
     }
 }

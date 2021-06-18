@@ -25,7 +25,8 @@
                 "updated_at": "2020-01-15T05:00:00.000000Z"
             },
             "attendees": [],
-            "comments": []
+            "comments": [],
+            "zoom_meeting_id": null
         }
     ],
     "2020-01-14": [],
@@ -55,7 +56,8 @@
                 "updated_at": "2020-01-15T05:00:00.000000Z"
             },
             "attendees": [],
-            "comments": []
+            "comments": [],
+            "zoom_meeting_id": null
         },
         {
             "id": 2,
@@ -82,7 +84,8 @@
                 "updated_at": "2020-01-15T05:00:00.000000Z"
             },
             "attendees": [],
-            "comments": []
+            "comments": [],
+            "zoom_meeting_id": null
         }
     ],
     "2020-01-16": [],
@@ -112,7 +115,8 @@
                 "updated_at": "2020-01-15T05:00:00.000000Z"
             },
             "attendees": [],
-            "comments": []
+            "comments": [],
+            "zoom_meeting_id": null
         }
     ]
 }

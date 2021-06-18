@@ -14,6 +14,7 @@ use App\Http\Requests\UpdateGrowthSessionRequest;
 use App\Http\Resources\GrowthSession as GrowthSessionResource;
 use App\Http\Resources\GrowthSessionWeek;
 use App\Policies\GrowthSessionPolicy;
+use App\Services\Zoom\ZoomService;
 use App\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,9 +43,14 @@ class GrowthSessionController extends Controller
         return GrowthSessionResource::collection(GrowthSession::today()->get());
     }
 
-    public function store(StoreGrowthSessionRequest $request)
+    public function store(StoreGrowthSessionRequest $request, ZoomService $zoom)
     {
         $newGrowthSession = new GrowthSession ($request->validated());
+
+        if ($request->validated()['create_zoom_meeting']) {
+            $newGrowthSession['zoom_meeting_id'] = $zoom->createMeeting($newGrowthSession);
+        }
+
         $newGrowthSession->save();
         $request->user()->growthSessions()->attach($newGrowthSession, ['user_type_id' => UserType::OWNER_ID]);
 
@@ -83,9 +89,17 @@ class GrowthSessionController extends Controller
         return $growthSession;
     }
 
-    public function update(UpdateGrowthSessionRequest $request, GrowthSession $growthSession)
+    public function update(UpdateGrowthSessionRequest $request, GrowthSession $growthSession, ZoomService $zoom)
     {
         $originalValues = $growthSession->toArray();
+
+        if ($request->validated()['create_zoom_meeting']) {
+            $growthSession['zoom_meeting_id'] = $zoom->createMeeting($growthSession);
+        } else {
+            $zoom->deleteMeeting($growthSession['zoom_meeting_id']);
+            $growthSession['zoom_meeting_id'] = null;
+        }
+
         $growthSession->update($request->validated());
         event(new GrowthSessionUpdated($originalValues, $growthSession->toArray()));
 

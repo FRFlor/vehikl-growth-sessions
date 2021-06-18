@@ -93,6 +93,11 @@
                     <span class="attendee_limit">{{ growthSession.attendee_limit }}</span>
                 </div>
 
+                <div class="mb-3" v-if="growthSession.zoom_meeting_id">
+                    <h3 class="text-2xl font-sans inline font-light mr-3 text-blue-700">Zoom Link:</h3>
+                    <a :href="`https://us02web.zoom.us/j/${growthSession.zoom_meeting_id}`" target="_blank">Zoom Meeting Link</a>
+                </div>
+
                 <h3 class="text-2xl font-sans font-light mb-3 text-blue-700">Attendees</h3>
                 <ul>
                     <li v-for="attendee in growthSession.attendees">

@@ -24,6 +24,7 @@ class StoreGrowthSessionRequest extends FormRequest
             'attendee_limit' => 'sometimes|integer|min:4',
             'discord_channel_id' => 'sometimes|string',
             'is_public' => 'sometimes|boolean',
+            'create_zoom_meeting' => 'sometimes|boolean',
         ];
     }
 }

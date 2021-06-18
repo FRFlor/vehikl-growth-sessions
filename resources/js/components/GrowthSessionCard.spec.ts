@@ -43,7 +43,8 @@ const growthSessionData: GrowthSession = new GrowthSession({
     attendees: [
         attendee
     ],
-    comments: []
+    comments: [],
+    zoom_meeting_id: null,
 });
 
 describe('GrowthSessionCard', () => {

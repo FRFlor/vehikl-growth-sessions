@@ -30,7 +30,8 @@ class GrowthSessionFactory extends Factory
             'start_time' => now()->setTime(15, 30),
             'end_time' => now()->setTime(17, 00),
             'attendee_limit' => GrowthSession::NO_LIMIT,
-            'is_public' => true
+            'is_public' => true,
+            'zoom_meeting_id' => null,
         ];
     }
 }
